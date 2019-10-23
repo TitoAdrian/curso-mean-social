@@ -67,7 +67,7 @@ export class PublicationsComponent implements OnInit {
                     this.status = 'error';
                 }
             }
-        )
+        );
     }
 
     public noMore = false;

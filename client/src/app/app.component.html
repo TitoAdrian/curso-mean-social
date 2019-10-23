@@ -3,7 +3,7 @@
     <div class="container-fluid">
 
       <div class="navbar-header">
-        <a href="#" class="navbar-brand">{{title}}</a>
+        <a [routerLink]="['/home']" class="navbar-brand">{{title}}</a>
       </div>
 
       <ul class="nav navbar-nav" *ngIf="identity">
