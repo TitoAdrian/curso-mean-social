@@ -3,7 +3,7 @@
         {{ title }}
     </h1>
     <div id="data-profile" *ngIf="user">
-        <div class="avatar pull-left">
+        <div class="col-lg-12 avatar pull-left">
             <img src="{{ url + 'get-image-user/' + user.image }}" *ngIf="user.image"/>
             <img src="assets/user.png" *ngIf="!user.image"/>
         </div>
