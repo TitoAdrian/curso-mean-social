@@ -39,5 +39,5 @@ testem.log
 Thumbs.db
 
 # images Upload
-/uploads/publications
-/uploads/users
+/publications
+/users
