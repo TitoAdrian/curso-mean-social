@@ -7,7 +7,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class HomeComponent implements OnInit {
     public title: string;
-    public identity;
+    public identity: any;
 
     constructor(
         private _userService: UserService
