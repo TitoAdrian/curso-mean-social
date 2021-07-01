@@ -8,7 +8,7 @@ import { User } from '../models/user';
 export class UserService {
     public url: string;
     public identity;
-    public token;
+    public token: string;
     public stats;
 
     constructor(public _http: HttpClient) {

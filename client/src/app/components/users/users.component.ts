@@ -16,11 +16,11 @@ export class UsersComponent implements OnInit {
     public url: string;
     public identity;
     public token;
-    public page;
+    public page: number;
     public next_page;
     public prev_page;
-    public total;
-    public pages;
+    public total: number;
+    public pages: number;
     public users: User[];
     public follows;
     public status: string;

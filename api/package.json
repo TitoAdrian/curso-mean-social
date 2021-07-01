@@ -21,6 +21,7 @@
     "mquery": "^3.2.5"
   },
   "devDependencies": {
+    "@types/mongoose": "^5.11.97",
     "nodemon": "^2.0.4"
   }
 }

@@ -15,12 +15,12 @@ export class ProfileComponent implements OnInit {
     public title: string;
     public user: User;
     public status: string;
-    public identity;
-    public token;
-    public url;
+    public identity: User;
+    public token: string;
+    public url: string;
     public stats;
-    public followed;
-    public following;
+    public followed: boolean;
+    public following: boolean;
 
     constructor(private _route: ActivatedRoute, private _router: Router, private _userService: UserService, private _followService: FollowService){
         this.title = 'Perfil';

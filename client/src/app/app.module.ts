@@ -28,8 +28,7 @@ import { FollowedComponent } from './components/followed/followed.component';
 // Servicios
 import { UserService } from './services/user.service';
 import { UserGuard } from './services/user.guard';
-
-import * as $ from 'jquery';
+import { UploadService } from './services/upload.service';
 
 @NgModule({
   declarations: [
@@ -55,7 +54,7 @@ import * as $ from 'jquery';
     MomentModule,
     MessagesModule
   ],
-  providers: [UserService, UserGuard],
+  providers: [UserService, UserGuard, UploadService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

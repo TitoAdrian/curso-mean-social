@@ -1,7 +1,6 @@
 'use strict'
 
 var express = require('express');
-var bodyParser = require('body-parser');
 
 var app = express();
 
@@ -12,8 +11,8 @@ var publication_routes = require('./routes/publication');
 var message_routes = require('./routes/message');
 
 // middlewares
-app.use(bodyParser.urlencoded({ extended:false }));
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // cors
 app.use((req, res, next) => {

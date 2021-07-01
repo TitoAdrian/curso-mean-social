@@ -3,8 +3,8 @@
 </div>
 <div id="user-card" class="col-lg-4 panel panel-default pull-left">
     <div class="avatar pull-left">
-        <img src="{{ url + 'get-image-user/' + identity.image }}" *ngIf="identity.name">
-        <img src="assets/user.png" *ngIf="!identity.name"> 
+        <img src="{{ url + 'get-image-user/' + identity.image }}" *ngIf="identity.image">
+        <img src="assets/user.png" *ngIf="!identity.image"> 
     </div>
 
     <div class="name-surname pull-left">
