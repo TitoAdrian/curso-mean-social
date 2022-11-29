@@ -15,7 +15,7 @@ import { User } from 'src/app/models/user';
 export class SidebarComponent implements OnInit {
   public identity: User;
   public token: string;
-  public stats;
+  public stats: any;
   public url: string;
   public status: string;
   public publication: Publication;
@@ -38,14 +38,14 @@ export class SidebarComponent implements OnInit {
     console.log("Sidebar.component ha sido creado correctamente");
   }
 
-  onSubmit(form, $event) {
+  onSubmit(form: any, $event: any) {
     this._publicationService
       .addPublication(this.token, this.publication)
       .subscribe(
         (response) => {
           if (response.publication) {
             // this.publication = response.publication;
-            //Subir imagen
+            // Subir imagen
             if (this.filesToUpload && this.filesToUpload.length) {
               this._uploadService
                 .makeFileRequest(
@@ -55,7 +55,7 @@ export class SidebarComponent implements OnInit {
                   this.token,
                   "image"
                 )
-                .then((result: any) => {
+                .subscribe((result: any) => {
                   this.publication.file = result.image;
                   this.status = "success";
                   form.reset();

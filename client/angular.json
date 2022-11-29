@@ -136,5 +136,8 @@
       }
     }
   },
-  "defaultProject": "social-network"
+  "defaultProject": "social-network",
+  "cli": {
+    "analytics": "1ab56e8a-2aec-4378-9247-682652fa3ae8"
+  }
 }
