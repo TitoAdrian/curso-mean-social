@@ -1,27 +1,28 @@
 'use strict'
 
-var express = require('express');
+const cors = require('cors');
+const express = require('express');
+const bodyParser = require('body-parser');
 
 var app = express();
 
+const corsOptions = {
+    origin: "*",
+    credentials: true,
+    optionSuccessStatus: 200
+}
+
 // cargar rutas
-var user_routes = require('./routes/user');
-var follow_routes = require('./routes/follow');
-var publication_routes = require('./routes/publication');
-var message_routes = require('./routes/message');
+const user_routes = require('./routes/user');
+const follow_routes = require('./routes/follow');
+const publication_routes = require('./routes/publication');
+const message_routes = require('./routes/message');
 
 // middlewares
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
-// cors
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-    res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
-    next();
-});
+app.use(bodyParser.json())
+app.use(cors(corsOptions));
 
 // rutas
 app.use('/api', user_routes);

@@ -14,21 +14,15 @@ export class UploadService {
 
   makeFileRequest(
     url: string,
-    params: Array<string>,
-    files: Array<File>,
-    token: string,
+    file: File,
     name: string
   ): Observable<any> {
     var formData = new FormData();
-    var xhr = new XMLHttpRequest();
-    if (files) {
-      for (var i = 0; i < files.length; i++) {
-        formData.append(name, files[i], files[i].name);
-      }
+    if (file) {
+        formData.append(name, file[0]);
     }
 
     const headers = new HttpHeaders()
-      .set("Content-Type", "application/json")
       .set("Authorization", this.userService.getToken());
 
     return this.http.post(url, formData, { headers: headers });

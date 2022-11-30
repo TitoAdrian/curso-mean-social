@@ -17,6 +17,7 @@ export class UserEditComponent implements OnInit {
   public token: string;
   public status: string;
   public url: string;
+  public filesToUpload: File;
 
   constructor(
     private _route: ActivatedRoute,
@@ -48,13 +49,15 @@ export class UserEditComponent implements OnInit {
           // Subida de imagen de usuario
           this._uploadService.makeFileRequest(
               this.url + "upload-image-user/" + this.user._id,
-              [],
               this.filesToUpload,
-              this.token,
               "image"
-            ).subscribe((result: any) => {
-              this.user.image = result.user.image;
-              localStorage.setItem("identity", JSON.stringify(this.user));
+            ).subscribe((result) => {
+              if(!result.user) {
+                console.log(result);
+              } else {
+                this.user.image = result.user.image;
+                localStorage.setItem("identity", JSON.stringify(this.user));
+              }
             });
         }
       },
@@ -68,9 +71,8 @@ export class UserEditComponent implements OnInit {
     );
   }
 
-  public filesToUpload: Array<File>;
   fileChangeEvent(fileInput: any) {
-    this.filesToUpload = <Array<File>>fileInput.target.files;
+    this.filesToUpload = fileInput.target.files;
     console.log(this.filesToUpload);
   }
 }

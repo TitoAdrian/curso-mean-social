@@ -19,6 +19,7 @@ export class SidebarComponent implements OnInit {
   public url: string;
   public status: string;
   public publication: Publication;
+  public filesToUpload: File;
 
   constructor(
     private _route: ActivatedRoute,
@@ -46,13 +47,11 @@ export class SidebarComponent implements OnInit {
           if (response.publication) {
             // this.publication = response.publication;
             // Subir imagen
-            if (this.filesToUpload && this.filesToUpload.length) {
+            if (this.filesToUpload) {
               this._uploadService
                 .makeFileRequest(
                   this.url + "upload-image-pub/" + response.publication._id,
-                  [],
                   this.filesToUpload,
-                  this.token,
                   "image"
                 )
                 .subscribe((result: any) => {
@@ -86,9 +85,8 @@ export class SidebarComponent implements OnInit {
       );
   }
 
-  public filesToUpload: Array<File>;
   fileChangedEvent(fileInput: any) {
-    this.filesToUpload = <Array<File>>fileInput.target.files;
+    this.filesToUpload = fileInput.target.files;
   }
 
   //Output

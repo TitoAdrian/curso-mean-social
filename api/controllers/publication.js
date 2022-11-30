@@ -134,22 +134,20 @@ function deletePublication(req, res){
 function uploadImage(req, res){
 	var publicationId = req.params.id;
 
-	if (req.files) {
-		var file_path = req.files.image.path;
+	if (req.file) {
+		var file_path = req.file.originalname;
 
-		var file_split = file_path.split('\\');
+		var file_split = file_path.split('.');
 
-		var file_name = file_split[2];
+		var file_name = file_split[0];
 
-		var ext_split = file_name.split('\.');
+		var file_ext = file_split[1];
 
-		var file_ext = ext_split[1];
-
-		if (file_ext == 'png' || file_ext == 'jpg' || file_ext == 'jpeg' ||	file_ext == 'gif') {
+		if (file_ext == 'png' || file_ext == 'jpg' || file_ext == 'jpeg' ||	file_ext == 'gif' || file_ext === "webp" ) {
             Publication.findOne({'user': req.user.sub, '_id': publicationId}).exec((err, publication)=>{
                 if(publication){
                     // actualizar docuemto de publicación
-                    Publication.findByIdAndUpdate(publicationId, { file: file_name }, { new: true }, (err, publicationUpdate) => {
+                    Publication.findByIdAndUpdate(publicationId, { file: file_path }, { new: true }, (err, publicationUpdate) => {
                         if(err) return res.status(500).send({message: 'Error en la petición'});
                         if(!publicationUpdate) return res.status(404).send({ message: 'No se ha podido actualizar la publicacion' });
 
