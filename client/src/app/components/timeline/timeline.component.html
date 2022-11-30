@@ -2,7 +2,7 @@
     <h1 class="h1-strong">{{ title }}
         <button class="btn btn-success btn-sm" (click)="refresh($event)">Mostrar nuevas</button>
     </h1>
-    <publications [user]="identity._id"></publications>
+    <publications [user]="identity._id" [publications]="publications"></publications>
     
 </div>
 

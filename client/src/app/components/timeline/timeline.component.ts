@@ -20,6 +20,7 @@ export class TimeLineComponent implements OnInit {
   public page: number;
   public total: number;
   public pages: number;
+  public noMore: boolean;
   public itemsPerPage: number;
   public publications: Publication[];
   public showImage: number;
@@ -35,6 +36,7 @@ export class TimeLineComponent implements OnInit {
     this.token = this._userService.getToken();
     this.url = GLOBAL.url;
     this.page = 1;
+    this.noMore = false;
   }
 
   ngOnInit() {
@@ -78,7 +80,6 @@ export class TimeLineComponent implements OnInit {
     );
   }
 
-  public noMore = false;
   viewMore() {
     this.page += 1;
     if (this.page === this.pages) {

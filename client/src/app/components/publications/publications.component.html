@@ -27,7 +27,7 @@
                 <div class="pull-right" *ngIf="publication._id != identity._id">
                     &nbsp;
                     <!-- Button HTML (to Trigger Modal) -->
-                    <a href="#myModal{{publication._id}}" role="button" class="btn btn-large btn-danger" data-toggle="modal" *ngIf="showImage != publication._id">
+                    <a href="#myModal{{publication._id}}" role="button" class="btn btn-large btn-danger" data-toggle="modal" *ngIf="canDelete()">
                             <span class="glyphicon glyphicon-trash"></span>
                     </a>
                     

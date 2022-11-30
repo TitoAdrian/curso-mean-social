@@ -21,8 +21,8 @@ export class PublicationsComponent implements OnInit {
     public total;
     public pages;
     public itemsPerPage;
-    public publications: Publication[];
     public showImage: number;
+    @Input() publications: Publication[];
     @Input() user: string;
 
     constructor (private _route: ActivatedRoute, private _router: Router, private _userService: UserService, private _publicationService: PublicationService) {
@@ -74,10 +74,14 @@ export class PublicationsComponent implements OnInit {
     showThisImage(id: number) {
         this.showImage = id;
     }
-
+    
     hideThisImage() {
         this.showImage = null;
-    }    
+    }
+
+    refresh(event = null) {
+        
+    }
 
     public noMore = false;
     viewMore() {
@@ -88,4 +92,21 @@ export class PublicationsComponent implements OnInit {
 
         this.getPublications(this.user, this.page, true);
     }
+
+    canDelete(event) {
+        if(this.identity ) {
+            return true;
+        }
+    }
+
+    deletePublication(id: number) {
+        this._publicationService.deletePublication(this.token, id).subscribe(
+          (response) => {
+            this.refresh();
+          },
+          (error) => {
+            console.log(<any>error);
+          }
+        );
+      }
 }

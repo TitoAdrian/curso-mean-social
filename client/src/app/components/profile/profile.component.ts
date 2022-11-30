@@ -5,11 +5,13 @@ import { Follow } from './../../models/follow';
 import { UserService } from './../../services/user.service';
 import { FollowService } from './../../services/follow.service';
 import { GLOBAL } from './../../services/global';
+import { Publication } from 'src/app/models/publication';
+import { PublicationService } from 'src/app/services/publication.service';
 
 @Component({
     selector: 'profile',
     templateUrl: './profile.component.html',
-    providers: [UserService, FollowService]
+    providers: [UserService, FollowService, PublicationService]
 })
 export class ProfileComponent implements OnInit {
     public title: string;
@@ -19,11 +21,15 @@ export class ProfileComponent implements OnInit {
     public token: string;
     public url: string;
     public stats;
+    public total;
+    public pages;
+    public itemsPerPage;
     public followed: boolean;
     public following: boolean;
     public followUserOver;
+    public publications: Publication[];
 
-    constructor(private _route: ActivatedRoute, private _router: Router, private _userService: UserService, private _followService: FollowService){
+    constructor(private _route: ActivatedRoute, private _router: Router, private _userService: UserService, private _followService: FollowService, private _publicationService: PublicationService){
         this.title = 'Perfil';
         this.identity = this._userService.getIdentity();
         this.token = this._userService.getToken();
@@ -43,6 +49,39 @@ export class ProfileComponent implements OnInit {
                 const id = params['id'];
                 this.getUser(id);
                 this.getCounters(id);
+            }
+        );
+    }
+
+    getPublications(user, page, adding = false) {
+        this._publicationService.getPublicationsUser(this.token, user, page).subscribe(
+            response => {
+                if (response.publications) {
+                    this.total = response.total_items;
+                    this.pages = response.pages;
+                    this.itemsPerPage = response.itemsPerPage;
+                    if (!adding) {
+                        this.publications = response.publications;
+                    } else {
+                        var arrayA = this.publications;
+                        var arrayB = response.publications;
+                        this.publications = arrayA.concat(arrayB);
+                        // $("html, body").animate({ scrollTop: $('html').prop("scrollHeight")}, 500);
+                    }
+
+                    if (page > this.pages){
+                        //this._router.navigate(['/home']);
+                    }
+                } else {
+                    this.status = 'error';
+                }
+            },
+            error => {
+                const errorMessage = <any>error;
+                console.log(errorMessage);
+                if (errorMessage != null) {
+                    this.status = 'error';
+                }
             }
         );
     }
