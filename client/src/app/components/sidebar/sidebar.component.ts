@@ -30,13 +30,17 @@ export class SidebarComponent implements OnInit {
   ) {
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
-    this.stats = this._userService.getStats();
     this.url = GLOBAL.url;
     this.publication = new Publication("", "", "", "", this.identity._id);
   }
 
   ngOnInit() {
     console.log("Sidebar.component ha sido creado correctamente");
+    this._userService.getCounters(this.identity._id).subscribe(response => {
+      this.stats = response;
+    }, error => {
+      console.log(<any>error);
+    });
   }
 
   onSubmit(form: any, $event: any) {

@@ -15,7 +15,7 @@ export class UsersComponent implements OnInit {
     public title: string;
     public url: string;
     public identity;
-    public token;
+    public token: string;
     public page: number;
     public next_page;
     public prev_page;

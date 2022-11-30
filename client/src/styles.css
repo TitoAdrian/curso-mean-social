@@ -11,7 +11,7 @@
 }
 
 .active {
-    background: #cc1717;
+    background: #cc1717 !important;
 }
 
 .pointer {

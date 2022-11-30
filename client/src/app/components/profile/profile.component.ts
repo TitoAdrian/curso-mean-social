@@ -21,6 +21,7 @@ export class ProfileComponent implements OnInit {
     public stats;
     public followed: boolean;
     public following: boolean;
+    public followUserOver;
 
     constructor(private _route: ActivatedRoute, private _router: Router, private _userService: UserService, private _followService: FollowService){
         this.title = 'Perfil';
@@ -91,6 +92,8 @@ export class ProfileComponent implements OnInit {
         this._followService.addFollow(this.token, follow).subscribe(
             response => {
                 this.following = true;
+                this.getCounters(this.user._id);
+                this.getUser(this.user._id);
             },error => {
                 console.log(<any>error);
             }
@@ -101,13 +104,20 @@ export class ProfileComponent implements OnInit {
         this._followService.deleteFollow(this.token, followed).subscribe(
             response => {
                 this.following = false;
+                this.getCounters(this.user._id);
+                this.getUser(this.user._id);
             }, error => {
                 console.log(<any>error);
             }
         );
     }
 
-    public followUserOver;
+    checkUser() {
+        if(!this.following && this.user._id != this.identity._id){
+            return true;
+        }
+    }
+
     mouseEnter(user_id){
         this.followUserOver = user_id;
     }

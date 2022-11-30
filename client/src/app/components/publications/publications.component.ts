@@ -22,6 +22,7 @@ export class PublicationsComponent implements OnInit {
     public pages;
     public itemsPerPage;
     public publications: Publication[];
+    public showImage: number;
     @Input() user: string;
 
     constructor (private _route: ActivatedRoute, private _router: Router, private _userService: UserService, private _publicationService: PublicationService) {
@@ -69,6 +70,14 @@ export class PublicationsComponent implements OnInit {
             }
         );
     }
+
+    showThisImage(id: number) {
+        this.showImage = id;
+    }
+
+    hideThisImage() {
+        this.showImage = null;
+    }    
 
     public noMore = false;
     viewMore() {

@@ -4,21 +4,43 @@
   </h1>
   <div id="data-profile" *ngIf="user">
     <div class="col-lg-12 avatar pull-left">
-      <img src="{{ url + 'get-image-user/' + user.image }}" *ngIf="user.image" />
+      <img
+        src="{{ url + 'get-image-user/' + user.image }}"
+        *ngIf="user.image"
+      />
       <img src="assets/user.png" *ngIf="!user.image" />
     </div>
     <div class="user-name pull-left">
-      <div class="label label-default pull-left" *ngIf="followed"> Te sigue </div>
       <div class="clearfix"></div>
       <div class="pull-left">
-        <p class="name">{{ user.name + ' ' + user.surname }}</p>
-        <p class="nick">{{ user.nick }}</p>
+        <p class="name">{{ user.name + " " + user.surname }}</p>
+        <div>
+          <span class="nick">{{ user.nick }}</span>
+          <span class="label label-default pull-right" *ngIf="followed">
+            Te sigue
+          </span>
+        </div>
       </div>
       <div class="clearfix"></div>
-      <div class="follow pull-left">
-        <button class="btn btn-success" *ngIf="!following" (click)="followUser(user._id)">Seguir</button>
-        <button class="btn btn-primary" *ngIf="following" (click)="unfollowUser(user._id)" (mouseenter)="mouseEnter(user._id)" (mouseleave)="mouseLeave()" [class.btn-danger]="user._id == followUserOver">
-          <span *ngIf="user._id == followUserOver; else following">Dejar de seguir</span>
+      <div class="follow pull-right">
+        <button
+          class="btn btn-success"
+          *ngIf="checkUser()"
+          (click)="followUser(user._id)"
+        >
+          Seguir
+        </button>
+        <button
+          class="btn btn-primary"
+          *ngIf="following"
+          (click)="unfollowUser(user._id)"
+          (mouseenter)="mouseEnter(user._id)"
+          (mouseleave)="mouseLeave()"
+          [class.btn-danger]="user._id == followUserOver"
+        >
+          <span *ngIf="user._id == followUserOver; else following"
+            >Dejar de seguir</span
+          >
           <ng-template #following> Siguiendo </ng-template>
         </button>
       </div>
@@ -41,7 +63,7 @@
         </a>
       </div>
       <div class="following-data">
-        <a href="#">
+        <a [routerLink]="['/perfil', user._id, 1]">
           <span class="label-stats"> Publicaciones </span>
           <span class="number-stats">
             {{ stats.publications }}
