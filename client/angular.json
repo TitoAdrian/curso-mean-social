@@ -62,18 +62,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "social-network:build"
+            "buildTarget": "social-network:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "social-network:build:production"
+              "buildTarget": "social-network:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "social-network:build"
+            "buildTarget": "social-network:build"
           }
         },
         "test": {
@@ -136,7 +136,6 @@
       }
     }
   },
-  "defaultProject": "social-network",
   "cli": {
     "analytics": "1ab56e8a-2aec-4378-9247-682652fa3ae8"
   }
